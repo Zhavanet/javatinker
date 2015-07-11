@@ -13,6 +13,10 @@ import java.util.Scanner;
 
 public class TravelCost {
 
+  private static final String DISTANCE_PROMPT = "Enter the total distance in km: ";
+  private static final String CONSUMPTION_PROMPT = "Enter the L/100km value for the vehicle: ";
+  private static final String GAS_PRICE_PROMPT = "Enter the current price of a liter of gas: ";
+
   private static double distance;
   private static double kmpl;
   private static double pricePerLiter;
@@ -25,26 +29,32 @@ public class TravelCost {
     // specifying the decimal delimeter
     // http://stackoverflow.com/questions/9081814/how-to-specify-decimal-delimiter
     //
-    Scanner in = new Scanner(System.in).useLocale(Locale.US);
+    Scanner in = new Scanner(System.in);
+    in.useLocale(Locale.US);
 
-    System.out.println("Enter the total distance in km: ");
+    System.out.println(DISTANCE_PROMPT);
 
     distance = in.nextDouble();
 
-    System.out.println("Enter the kmpl for the vehicule: ");
+    System.out.println(CONSUMPTION_PROMPT);
 
     kmpl = in.nextDouble();
 
-    System.out.println("Enter the current price of a liter of gas: ");
+    System.out.println(GAS_PRICE_PROMPT);
 
     pricePerLiter = in.nextDouble();
 
-    totalCost = (distance / kmpl) * pricePerLiter;
+    totalCost = computeCost(distance, kmpl, pricePerLiter);
 
     System.out.println("The trip is going to cost " + formatter.format(totalCost));
 
     in.close();
 
+  }
+
+  private static double computeCost(double distance, double kmpl, double pricePerLiter) {
+
+    return (distance / kmpl) * pricePerLiter;
   }
 
 }
